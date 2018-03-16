@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Template for the dummy service
+Parameters:
+  ClusterId:
+    Default: hackathon-march-ecs-cluster
+    Description: ECS Cluster in which the service will be running.
+    Type: String
+  ServiceTaskDefinitionArn:
+    Default: "arn:aws:ecs:eu-west-2:415297152241:task-definition/rest-exception-handling-rest-definition:5"  
+    Description: Task definition arn for the service.
+    Type: String
+  DesiredTaskCount:
+    Default: 1
+    Description: Desired number of tasks to run in the service.
+    Type: Number
+Resources:
+  ServiceRest:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !Ref ClusterId
+      DesiredCount: !Ref DesiredTaskCount
+      TaskDefinition: !Ref ServiceTaskDefinitionArn
